@@ -7,10 +7,6 @@ from utils.scraper import scrape_article
 from utils.preprocessing import clean_text
 import os
 import logging
-import nltk
-
-# Download stopwords resource if not already available
-nltk.download('stopwords')
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -23,16 +19,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 model = joblib.load('fake_news_model.pkl')
 vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
-@app.route('/', methods=['GET'])
-def home():
-    """
-    Default route for the Flask app.
-    """
-    return jsonify({'message': 'Welcome to the Fake News Detection!'}), 200
-
-@app.route('/favicon.ico')
-def favicon():
-    return '', 204  # No content for favicon requests
 
 def preprocess_and_predict(text):
     """
@@ -178,4 +164,4 @@ def internal_server_error(error):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True)
