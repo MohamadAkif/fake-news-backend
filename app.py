@@ -7,6 +7,10 @@ from utils.scraper import scrape_article
 from utils.preprocessing import clean_text
 import os
 import logging
+import nltk
+
+# Download stopwords resource if not already available
+nltk.download('stopwords')
 
 # Initialize Flask app
 app = Flask(__name__)
